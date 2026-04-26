@@ -50,3 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sections.forEach(sec => sectionObserver.observe(sec));
 });
+
+
+    // 3. Robot Fleeing Logic
+    const robotsOuter = document.querySelectorAll(".robot-inner");
+    robotsOuter.forEach(robot => {
+        robot.addEventListener("mouseenter", function() {
+            if (!this.classList.contains("scared")) {
+                this.classList.add("scared");
+                // Robot disappears, then comes back after 2.5 seconds!
+                setTimeout(() => {
+                    this.classList.remove("scared");
+                }, 2500);
+            }
+        });
+    });
+

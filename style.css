@@ -403,7 +403,7 @@ main {
 .robot-layer {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
+    pointer-events: none; /* so layer doesn't block */
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
     z-index: 0;
@@ -412,39 +412,67 @@ main {
     opacity: 1;
 }
 
+/* Base robot container */
 .robot {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 140px; /* Big robots! */
+    height: 140px;
+    pointer-events: auto; /* allow hover */
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%23EC4899' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'></circle><line x1='12' y1='8' x2='12' y2='12'></line><line x1='12' y1='16' x2='12.01' y2='16'></line></svg>") 20 20, pointer;
 }
 
-.robot svg {
+/* The actual svg wrapper that takes the hover/scared effect */
+.robot-inner {
     width: 100%; height: 100%;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease;
 }
 
-/* Robot Animations */
-@keyframes bot-float-right {
-    0% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); }
-    50% { transform: translateY(-20px) translateX(20px) scale(1.05) rotate(5deg); }
-    100% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); }
+.robot-inner svg {
+    width: 100%; height: 100%;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
 }
 
-@keyframes bot-float-left {
-    0% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); }
-    50% { transform: translateY(20px) translateX(-20px) scale(1.05) rotate(-5deg); }
-    100% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); }
+/* Scared JS interaction */
+.robot-inner.scared {
+    opacity: 0;
+    transform: scale(0.2) translateY(-300px) rotate(360deg);
+    pointer-events: none; /* Don't hover again while running */
 }
 
-/* Random placements */
-.bot1-a { top: 15%; left: 10%; animation: bot-float-right 8s infinite ease-in-out; }
-.bot1-b { top: 60%; right: 15%; animation: bot-float-left 10s infinite ease-in-out; }
-.bot1-c { top: 30%; right: 25%; animation: bot-float-right 9s infinite ease-in-out reverse; width: 50px; height: 50px;}
+/* Wide Fast Roaming Animations! */
+@keyframes roam-1 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(40vw, -10vh) rotate(20deg); }
+    50% { transform: translate(10vw, 30vh) rotate(-10deg); }
+    75% { transform: translate(50vw, 40vh) rotate(15deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
 
-.bot2-a { top: 20%; right: 10%; animation: bot-float-left 7s infinite ease-in-out; }
-.bot2-b { top: 60%; left: 8%; animation: bot-float-right 12s infinite ease-in-out; width: 90px; height: 90px;}
+@keyframes roam-2 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-30vw, 50vh) rotate(-25deg); }
+    66% { transform: translate(40vw, 20vh) rotate(10deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
 
-.bot3-a { top: 25%; left: 15%; animation: bot-float-right 11s infinite ease-in-out; }
-.bot3-b { top: 70%; right: 10%; animation: bot-float-left 8s infinite ease-in-out; }
-.bot3-c { bottom: 10%; left: 30%; animation: bot-float-right 10s infinite ease-in-out reverse; width: 70px; height: 70px;}
+@keyframes roam-3 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(25vw, 15vh) rotate(30deg); }
+    50% { transform: translate(-45vw, 30vh) rotate(-15deg); }
+    80% { transform: translate(-20vw, -20vh) rotate(5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Robot positioning & assigning roams */
+.bot1-a { top: 20%; left: 10%; animation: roam-1 12s infinite alternate ease-in-out; width: 160px; height: 160px; }
+.bot1-b { top: 50%; right: 15%; animation: roam-2 15s infinite alternate ease-in-out; }
+.bot1-c { top: 10%; right: 40%; animation: roam-3 10s infinite alternate ease-in-out; width: 120px; height: 120px;}
+
+.bot2-a { top: 15%; right: 5%; animation: roam-2 14s infinite alternate ease-in-out; width: 180px; height: 180px; }
+.bot2-b { top: 60%; left: 5%; animation: roam-1 16s infinite alternate ease-in-out; width: 150px; height: 150px;}
+
+.bot3-a { top: 25%; left: 10%; animation: roam-3 13s infinite alternate ease-in-out; width: 150px; height: 150px;}
+.bot3-b { top: 70%; right: 10%; animation: roam-2 16s infinite alternate ease-in-out; }
+.bot3-c { bottom: 10%; left: 40%; animation: roam-1 14s infinite alternate ease-in-out; width: 170px; height: 170px;}
 
