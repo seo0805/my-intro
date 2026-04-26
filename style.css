@@ -375,3 +375,76 @@ main {
         height: 140px;
     }
 }
+
+
+/* Tagline hover shine */
+.tagline {
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+}
+
+.tagline::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    transform: skewX(-20deg);
+    transition: none;
+}
+
+.tagline:hover::before {
+    left: 200%;
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Robot Layer */
+.robot-layer {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 0;
+}
+.robot-layer.active {
+    opacity: 1;
+}
+
+.robot {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+}
+
+.robot svg {
+    width: 100%; height: 100%;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+}
+
+/* Robot Animations */
+@keyframes bot-float-right {
+    0% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); }
+    50% { transform: translateY(-20px) translateX(20px) scale(1.05) rotate(5deg); }
+    100% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); }
+}
+
+@keyframes bot-float-left {
+    0% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); }
+    50% { transform: translateY(20px) translateX(-20px) scale(1.05) rotate(-5deg); }
+    100% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); }
+}
+
+/* Random placements */
+.bot1-a { top: 15%; left: 10%; animation: bot-float-right 8s infinite ease-in-out; }
+.bot1-b { top: 60%; right: 15%; animation: bot-float-left 10s infinite ease-in-out; }
+.bot1-c { top: 30%; right: 25%; animation: bot-float-right 9s infinite ease-in-out reverse; width: 50px; height: 50px;}
+
+.bot2-a { top: 20%; right: 10%; animation: bot-float-left 7s infinite ease-in-out; }
+.bot2-b { top: 60%; left: 8%; animation: bot-float-right 12s infinite ease-in-out; width: 90px; height: 90px;}
+
+.bot3-a { top: 25%; left: 15%; animation: bot-float-right 11s infinite ease-in-out; }
+.bot3-b { top: 70%; right: 10%; animation: bot-float-left 8s infinite ease-in-out; }
+.bot3-c { bottom: 10%; left: 30%; animation: bot-float-right 10s infinite ease-in-out reverse; width: 70px; height: 70px;}
+

@@ -1,19 +1,52 @@
-// script.js – Scroll animation using Intersection Observer
+// script.js – Scroll animation and Robot Background logic
 
 document.addEventListener('DOMContentLoaded', () => {
-  const observerOptions = {
-    threshold: 0.1,
-  };
+    // 1. Reveal Observer (for fade-in elements)
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
-      }
+    const fadeElems = document.querySelectorAll('.fade-in');
+    fadeElems.forEach(el => revealObserver.observe(el));
+
+    // 2. Section Observer (for changing robot background)
+    const sections = document.querySelectorAll('section');
+    const layers = {
+        'hero': document.getElementById('layer-hero'),
+        'about': document.getElementById('layer-mid'),
+        'ai-vision': document.getElementById('layer-mid'),
+        'future': document.getElementById('layer-bottom'),
+        'goals': document.getElementById('layer-bottom'),
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        let maxVisible = 0;
+        let activeSectionId = null;
+
+        // Find the section that takes up the most space in the viewport
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > maxVisible) {
+                maxVisible = entry.intersectionRatio;
+                activeSectionId = entry.target.id;
+            }
+        });
+
+        if (activeSectionId && layers[activeSectionId]) {
+            // Hide all layers
+            Object.keys(layers).forEach(key => {
+                if (layers[key]) layers[key].classList.remove('active');
+            });
+            // Show the active layer
+            layers[activeSectionId].classList.add('active');
+        }
+    }, {
+        threshold: [0.1, 0.3, 0.5, 0.7, 0.9]
     });
-  }, observerOptions);
 
-  const fadeElems = document.querySelectorAll('.fade-in');
-  fadeElems.forEach(el => observer.observe(el));
+    sections.forEach(sec => sectionObserver.observe(sec));
 });
