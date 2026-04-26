@@ -6,7 +6,7 @@
     <title>TOYO（瀬尾）| コンサルタント</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="コンサルタントTOYO（瀬尾）の自己紹介ページです。AIとどのように向き合い、どう活用できるかを探求しています。">
 </head>
@@ -14,6 +14,7 @@
     <div class="bg-elements">
         <div class="glow glow-1"></div>
         <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
     </div>
 
     <nav class="navbar fade-in">
@@ -30,9 +31,36 @@
 
     <main>
         <section class="hero fade-in">
-            <div class="hero-content glass-card">
+            <div class="hero-content">
                 <div class="avatar-container">
-                    <img src="avatar.svg" alt="TOYO Avatar" class="avatar">
+                    <svg class="avatar-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#4F46E5"/>
+                          <stop offset="100%" stop-color="#EC4899"/>
+                        </linearGradient>
+                      </defs>
+                      <rect width="200" height="200" fill="url(#bgGrad)" rx="50" ry="50" class="avatar-bg"/>
+                      
+                      <g class="glasses-group">
+                          <!-- Left Lens -->
+                          <rect x="35" y="80" width="55" height="40" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="8"/>
+                          <!-- Right Lens -->
+                          <rect x="110" y="80" width="55" height="40" rx="10" ry="10" fill="none" stroke="#ffffff" stroke-width="8"/>
+                          <!-- Bridge -->
+                          <line x1="90" y1="95" x2="110" y2="95" stroke="#ffffff" stroke-width="8"/>
+                          <!-- Arms -->
+                          <line x1="20" y1="85" x2="35" y2="85" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+                          <line x1="180" y1="85" x2="165" y2="85" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+                          
+                          <!-- Cool glare -->
+                          <line x1="45" y1="90" x2="60" y2="110" stroke="rgba(255,255,255,0.7)" stroke-width="4" stroke-linecap="round"/>
+                          <line x1="120" y1="90" x2="135" y2="110" stroke="rgba(255,255,255,0.7)" stroke-width="4" stroke-linecap="round"/>
+                      </g>
+                      
+                      <!-- Smile -->
+                      <path d="M 80 140 Q 100 160 120 140" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" class="smile"/>
+                    </svg>
                     <div class="ring"></div>
                 </div>
                 <h1 class="main-title">TOYO <span class="jp-name">（瀬尾）</span></h1>
@@ -42,6 +70,7 @@
 
         <section id="about" class="content-section">
             <div class="glass-card fade-in">
+                <div class="card-bg-effect"></div>
                 <div class="section-header">
                     <span class="section-num">01</span>
                     <h2>自己紹介</h2>
@@ -56,6 +85,7 @@
 
         <section id="ai-vision" class="content-section">
             <div class="glass-card fade-in delay-1">
+                <div class="card-bg-effect"></div>
                 <div class="section-header">
                     <span class="section-num">02</span>
                     <h2>自分にとってAIとはどういう存在か</h2>
@@ -69,6 +99,7 @@
 
         <section id="future" class="content-section">
             <div class="glass-card fade-in">
+                <div class="card-bg-effect"></div>
                 <div class="section-header">
                     <span class="section-num">03</span>
                     <h2>今後AIとどう向き合いたいか</h2>
@@ -81,6 +112,7 @@
 
         <section id="goals" class="content-section">
             <div class="glass-card fade-in delay-1">
+                <div class="card-bg-effect"></div>
                 <div class="section-header">
                     <span class="section-num">04</span>
                     <h2>挑戦したいこと</h2>
